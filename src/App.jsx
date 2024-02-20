@@ -25,6 +25,10 @@ const validationSchema = yup.object().shape({
     .required(),
 
     department: yup.string().oneOf(["science", "commerce","arts"], "Invalid department").label("Department").required(),
+
+    skills: yup.array().required().label("Skills").min(1).max(3),
+
+    eyeColor: yup.string().required().label("Eye color")
 });
 
 function App() {
@@ -42,10 +46,10 @@ function App() {
   };
 
   return (
-    <div className="app flex items-centerh justify-center ml-10 mt-10 w-full">
+    <div className="app flex items-centerh justify-center ml-10 mt-10 w-screen overflow-hidden">
       <form
         action=""
-        className="flex flex-col gap-4 w-[60%]"
+        className="flex flex-col gap-4 w-[50%] max-w-[400px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col w-[100%]">
@@ -178,9 +182,15 @@ function App() {
               </label>
             </div>
           </div>
+
+          <ErrorMessage
+            errors={errors}
+            name="department"
+            render={({ message }) => <p className="text-red-500">{message}</p>}
+          />
         </div>
 
-         <div className="skills">
+        <div className="skills">
           <label>Skills:</label>
             <div className="flex flex-wrap">
               <div className="flex">
@@ -195,77 +205,106 @@ function App() {
               <div className="flex">
                 <input 
                 type="checkbox" 
-                id="react"
+                id="javascript"
                 className="p-2 border"
-                value={"react"}
+                value={"javascript"}
+                {...register("skills")}
                 />
-                <label htmlFor="react" className="p-2">React</label>
+                <label htmlFor="javascript" className="p-2">Javascript</label>
               </div>
               <div className="flex">
                 <input 
                 type="checkbox" 
-                id="react"
+                id="html"
                 className="p-2 border"
-                value={"react"}
+                value={"html"}
+                {...register("skills")}
                 />
-                <label htmlFor="react" className="p-2">React</label>
+                <label htmlFor="html" className="p-2">HTML</label>
               </div>
               <div className="flex">
                 <input 
                 type="checkbox" 
-                id="react"
+                id="css"
                 className="p-2 border"
-                value={"react"}
+                value={"css"}
+                {...register("skills")}
                 />
-                <label htmlFor="react" className="p-2">React</label>
+                <label htmlFor="css" className="p-2">CSS</label>
               </div>
               <div className="flex">
                 <input 
                 type="checkbox" 
-                id="react"
+                id="node"
                 className="p-2 border"
-                value={"react"}
+                value={"node"}
+                {...register("skills")}
                 />
-                <label htmlFor="react" className="p-2">React</label>
+                <label htmlFor="node" className="p-2">Node</label>
               </div>
               <div className="flex">
                 <input 
                 type="checkbox" 
-                id="react"
+                id="express js"
                 className="p-2 border"
-                value={"react"}
+                value={"express js"}
+                {...register("skills")}
                 />
-                <label htmlFor="react" className="p-2">React</label>
+                <label htmlFor="express js" className="p-2">Express JS</label>
               </div>
               <div className="flex">
                 <input 
                 type="checkbox" 
-                id="react"
+                id="vue"
                 className="p-2 border"
-                value={"react"}
+                value={"vue"}
+                {...register("skills")}
                 />
-                <label htmlFor="react" className="p-2">React</label>
+                <label htmlFor="vue" className="p-2">Vue</label>
               </div>
               <div className="flex">
                 <input 
                 type="checkbox" 
-                id="react"
+                id="angular"
                 className="p-2 border"
-                value={"react"}
+                value={"angular"}
+                {...register("skills")}
                 />
-                <label htmlFor="react" className="p-2">React</label>
+                <label htmlFor="angular" className="p-2">Angular js</label>
               </div>
               <div className="flex">
                 <input 
                 type="checkbox" 
-                id="react"
+                id="framer motion"
                 className="p-2 border"
-                value={"react"}
+                value={"framer motion"}
+                {...register("skills")}
                 />
-                <label htmlFor="react" className="p-2">React</label>
+                <label htmlFor="framer motion" className="p-2">Framer Motion</label>
               </div>
             </div>
-         </div>
+            <ErrorMessage
+            errors={errors}
+            name="skills"
+            render={({ message }) => <p className="text-red-500">{message}</p>}
+          />
+        </div>
+        
+        <div className="flex flex-col ">
+          <label htmlFor="eyeColor">Eye Color</label>
+          <input
+            type="color"
+            id="eyeColor"
+            className=" border"
+            {...register("eyeColor")}
+          />
+
+          <ErrorMessage
+            errors={errors}
+            name=" eyeColor"
+            render={({ message }) => <p className="text-red-500">{message}</p>}
+          />
+        </div>
 
         <button
           type="submit"
